@@ -32,12 +32,12 @@ public class InputManager : MonoBehaviour
             _lastMousePositionX = Input.mousePosition.x;
         }
 
-        if (Input.GetMouseButton(0))
+        else if (Input.GetMouseButton(0))
         {
             if (Input.mousePosition.x - _lastMousePositionX != 0)
             {
-                float _xDifference = Input.mousePosition.x - _lastMousePositionX;
-                EventManager.current.OnInputEventInvoke(_xDifference);
+                float xDifference = Input.mousePosition.x - _lastMousePositionX;
+                EventManager.current.OnInputEventInvoke(xDifference);
                 _lastMousePositionX = Input.mousePosition.x;
 
             }

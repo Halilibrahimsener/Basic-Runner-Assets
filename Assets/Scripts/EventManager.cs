@@ -18,6 +18,8 @@ public class EventManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        Application.targetFrameRate = 60;
     }
     #endregion Singleton
 
@@ -26,9 +28,9 @@ public class EventManager : MonoBehaviour
 
     public event Action<float> OnInputEvent;
 
-    public void OnInputEventInvoke(float _xDifference)
+    public void OnInputEventInvoke(float xDifference)
     {
-        OnInputEvent?.Invoke(_xDifference);
+        OnInputEvent?.Invoke(xDifference);
     }
 }
 
