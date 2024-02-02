@@ -11,8 +11,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     [SerializeField] GameObject GroundObject;
     float _clampX;
-    [SerializeField] float ForwardSpeed = 0.1f;
-    [SerializeField] float LateralSpeed = 0.5f;
+    [SerializeField] PlayerSettings PlayerSetting;
     void Start()
     {
         EventManager.current.OnInputEvent += OnInputPlayerLateralMovement;
@@ -27,7 +26,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void FixedUpdate()
     {
-        float _forwardSpeed = ForwardSpeed * Time.deltaTime;
+        float _forwardSpeed = PlayerSetting.GetForwardSpeed() * Time.deltaTime;
         transform.Translate(0, 0, _forwardSpeed);
     }
 
@@ -37,7 +36,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         Vector3 pos;
         pos = transform.position;
-        pos.x += xDifference * LateralSpeed * Time.deltaTime;
+        pos.x += xDifference * PlayerSetting.GetLateralSpeed() * Time.deltaTime;
         pos.x = Mathf.Clamp(pos.x, -_clampX, _clampX);
         transform.position = pos;
     }
