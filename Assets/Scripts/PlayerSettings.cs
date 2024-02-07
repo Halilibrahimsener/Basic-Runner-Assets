@@ -8,6 +8,7 @@ public class PlayerSettings : ScriptableObject
     [Header("Player Movement Speed Values")]
     [SerializeField] float LateralSpeed;
     [SerializeField] float ForwardSpeed;
+    [SerializeField] int NumberOfGuns;
 
     public float GetLateralSpeed()
     {
@@ -17,6 +18,10 @@ public class PlayerSettings : ScriptableObject
     public float GetForwardSpeed()
     {
         return ForwardSpeed;
+    }
+    public int GetNumberOfGuns()
+    {
+        return NumberOfGuns;
     }
 
 

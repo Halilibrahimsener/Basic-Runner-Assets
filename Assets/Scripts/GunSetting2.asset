@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe8d6fe32b7a8514186ead044e708be6, type: 3}
-  m_Name: PlayerSetting1
+  m_Script: {fileID: 11500000, guid: 644860d91046a6948875f6dd998406d8, type: 3}
+  m_Name: GunSetting2
   m_EditorClassIdentifier: 
-  LateralSpeed: 1
-  ForwardSpeed: 5
-  NumberOfGuns: 1
+  GunID: 2
+  FireRate: 120
+  Damage: 15
+  BulletPrefab: {fileID: 8703168670904394102, guid: c78a169e250c4d5449c7012cd87c6a78, type: 3}

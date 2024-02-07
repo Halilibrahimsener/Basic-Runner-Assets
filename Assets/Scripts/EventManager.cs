@@ -32,5 +32,11 @@ public class EventManager : MonoBehaviour
     {
         OnInputEvent?.Invoke(xDifference);
     }
+
+    public event Action<Vector3> OnFireEvent;
+    public void OnFireEventInvoke(Vector3 PlayerPosition)
+    {
+        OnFireEvent?.Invoke(PlayerPosition);
+    }
 }
 
