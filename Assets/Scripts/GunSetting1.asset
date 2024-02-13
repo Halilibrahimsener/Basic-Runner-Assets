@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: GunSetting1
   m_EditorClassIdentifier: 
   GunID: 1
-  FireRate: 80
+  FireRate: 40
+  FireRange: 10
   Damage: 20
   BulletPrefab: {fileID: 8703168670904394102, guid: ca7642255ddfd4b44ba13e7675c5aa21, type: 3}

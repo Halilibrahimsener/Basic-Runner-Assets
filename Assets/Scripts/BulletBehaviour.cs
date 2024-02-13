@@ -1,38 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
-using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
 public class BulletBehaviour : MonoBehaviour
 {
-    private float fireRate;
-    private float timeBetweenTwoBullet;
+    Vector3 _startPosition;
+    [SerializeField] GunSettings _gunSetting;
 
+    float _fireRange;
 
     void Start()
     {
-
+        _startPosition = transform.position;
+        _fireRange = _gunSetting.GetFireRange();
     }
-
-
-    void Update()
+    private void Awake()
     {
 
+    }
+    void Update()
+    {
 
     }
 
     void FixedUpdate()
     {
-        transform.Translate(0, 0, 0.5f);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Door"))
+        if (transform.position.z - _startPosition.z < _fireRange)
         {
-            Destroy(gameObject);
+            transform.Translate(0, 0, 0.5f);
         }
-
+        else { Destroy(gameObject); }
     }
+    public void SetFireRange(float newFireRange) { _fireRange = newFireRange; }
+
 }

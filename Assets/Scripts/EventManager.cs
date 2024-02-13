@@ -38,5 +38,12 @@ public class EventManager : MonoBehaviour
     {
         OnFireEvent?.Invoke(PlayerPosition);
     }
+
+    public event Action<DoorType, float> OnUpdateFireRangeOrRate;
+    public void OnUpdateFireRangeOrRateInvoke(DoorType doorType, float doorValue)
+    {
+        OnUpdateFireRangeOrRate?.Invoke(doorType, doorValue);
+    }
+
 }
 

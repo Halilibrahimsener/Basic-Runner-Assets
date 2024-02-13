@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e84e20dff8f9f24e9fd3e321c779a06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponSetting: {fileID: 11400000, guid: c7b6f16d90909b74fa8501af09d8de67, type: 2}
+  _gunSetting: {fileID: 11400000, guid: c7b6f16d90909b74fa8501af09d8de67, type: 2}
 --- !u!54 &5118780220723600652
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -7,21 +7,21 @@ using UnityEngine;
 public class DoorSettings : ScriptableObject
 {
     [Header("Door Material Colors")]
-    [SerializeField] Color NegativeValueColor;
-    [SerializeField] Color PositiveValueColor;
+    [SerializeField] Material NegativeValueMaterial;
+    [SerializeField] Material PositiveValueMaterial;
 
     [Header("Door Settings")]
     [SerializeField] float ClosingSpeed;
 
 
 
-    public Color32 GetNegativeValueColors()
+    public Material GetNegativeValueMaterials()
     {
-        return NegativeValueColor;
+        return NegativeValueMaterial;
     }
-    public Color32 GetPositiveValueColors()
+    public Material GetPositiveValueMaterials()
     {
-        return PositiveValueColor;
+        return PositiveValueMaterial;
     }
 
     public float GetClosingSpeed()

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4443fa96605cfde4288a1b34a1599f10, type: 3}
   m_Name: DoorSetting1
   m_EditorClassIdentifier: 
-  NegativeValueColor: {r: 0.9622642, g: 0.040850822, b: 0.040850822, a: 0.30588236}
-  PositiveValueColor: {r: 0.08784264, g: 0.8867924, b: 0.1601917, a: 0.31764707}
+  NegativeValueMaterial: {fileID: 2100000, guid: 7368cbf38d88aa643899e942b0a62e58, type: 2}
+  PositiveValueMaterial: {fileID: 2100000, guid: 12255c296d137a745b95dfaf3693ff66, type: 2}
   ClosingSpeed: 40

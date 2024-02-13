@@ -1,22 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class GunBehaviour : MonoBehaviour
 {
-    [SerializeField] GunSettings gunSetting;
-    [SerializeField] float distanceBetweenGuns = 0.15f;
-    float timer = 0;
-    float fireDuration;
-    float fireRate;
+    [SerializeField] GunSettings _gunSetting;
+    GameObject _bulletPrefab;
+    [SerializeField] float _distanceBetweenGuns = 0.15f;
+    float _timer = 0;
+    float _fireRate;
+    float _fireRange;
 
     void Start()
     {
-        fireRate = gunSetting.GetFireRate();
-        fireDuration = 1f / (fireRate * Time.deltaTime);
-        EventManager.current.OnFireEvent += InstantiateBullet;
-    }
+        _fireRate = _gunSetting.GetFireRate();
+        _bulletPrefab = _gunSetting.GetBulletPrefab();
 
+        _gunSetting.SetFireRange(_gunSetting.GetStartingFireRange());
+        _fireRange = _gunSetting.GetFireRange();
+
+
+        EventManager.current.OnFireEvent += InstantiateBullet;
+        EventManager.current.OnUpdateFireRangeOrRate += UpdateFireRangeOrRate;
+    }
 
     void Update()
     {
@@ -26,30 +33,26 @@ public class GunBehaviour : MonoBehaviour
     private void InstantiateBullet(Vector3 PlayerPosition)
     {
         Vector3 gunPosition = GunPositioning(PlayerPosition);
-
-        //Debug.Log("GunBehaviour: x: " + gunPosition.x + ",y: " + gunPosition.y + ",z: " + gunPosition.z);
-        //Debug.Log("GunBehaviour2: x: " + transform.position.x + ",y: " + transform.position.y + ",z: " + transform.position.z);
-
-        if (timer > fireDuration)
+        float fireDuration = 1f / (5 * _fireRate * Time.deltaTime);
+        if (_timer > fireDuration)
         {
-            timer = 0;
-            GameObject bulletPrefab = gunSetting.GetBulletPrefab();
-            Instantiate(bulletPrefab, gunPosition, Quaternion.identity);
+            _timer = 0;
+            Instantiate(_bulletPrefab, gunPosition, Quaternion.identity);
         }
         else
         {
-            timer += Time.deltaTime;
+            _timer += Time.deltaTime;
         }
     }
 
     private Vector3 GunPositioning(Vector3 PlayerPosition)
     {
-        int gunID = gunSetting.GetGunID(); //1,2,3,4,...
-        float xPosition = gunID * distanceBetweenGuns;
+        int gunID = _gunSetting.GetGunID(); //1,2,3,4,...
+        float xPosition = gunID * _distanceBetweenGuns;
         Vector3 gunPosition;
         if (gunID % 2 == 0)
         {
-            xPosition -= distanceBetweenGuns;
+            xPosition -= _distanceBetweenGuns;
             gunPosition = Vector3.right * xPosition + PlayerPosition;
         }
         else
@@ -57,8 +60,19 @@ public class GunBehaviour : MonoBehaviour
             gunPosition = Vector3.left * xPosition + PlayerPosition;
         }
 
-        //transform.position = gunPosition;
+        transform.position = gunPosition;
 
         return gunPosition;
     }
+
+    private void UpdateFireRangeOrRate(DoorType doorType, float doorValue)
+    {
+        if (doorType == DoorType.FireRange)
+        {
+            _fireRange += doorValue;
+            _gunSetting.SetFireRange(_fireRange);
+        }
+        else { _fireRate += doorValue; }
+    }
 }
+
