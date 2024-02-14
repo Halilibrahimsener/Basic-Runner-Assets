@@ -32,11 +32,10 @@ public class EventManager : MonoBehaviour
     {
         OnInputEvent?.Invoke(xDifference);
     }
-
-    public event Action<Vector3> OnFireEvent;
-    public void OnFireEventInvoke(Vector3 PlayerPosition)
+    public event Action<Vector3> OnGunPositioningEvent;
+    public void OnGunPositioningEventInvoke(Vector3 PlayerPosition)
     {
-        OnFireEvent?.Invoke(PlayerPosition);
+        OnGunPositioningEvent?.Invoke(PlayerPosition);
     }
 
     public event Action<DoorType, float> OnUpdateFireRangeOrRate;
@@ -44,6 +43,5 @@ public class EventManager : MonoBehaviour
     {
         OnUpdateFireRangeOrRate?.Invoke(doorType, doorValue);
     }
-
 }
 

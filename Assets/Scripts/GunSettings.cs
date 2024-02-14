@@ -9,24 +9,20 @@ using UnityEngine;
 public class GunSettings : ScriptableObject
 {
     [Header("Gun General Settings")]
-    [SerializeField] int GunID;
-    [SerializeField] float FireRate;
-    [SerializeField] float StartingFireRange = 10;
+    public static int GunNumber = 0;
+    [SerializeField] float _fireRate;
+    [SerializeField] float _startingFireRange = 10;
     private float _fireRange;
-    [SerializeField] float Damage;
-    [SerializeField] GameObject BulletPrefab;
+    [SerializeField] float _damage;
+    [SerializeField] GameObject _bulletPrefab;
 
-    public int GetGunID() { return GunID; }
-
-    public float GetFireRate() { return FireRate; }
-
-    public float GetStartingFireRange() { return StartingFireRange; }
+    public int GetGunNumber() { return GunNumber; }
+    public float GetFireRate() { return _fireRate; }
+    public float GetStartingFireRange() { return _startingFireRange; }
     public float GetFireRange() { return _fireRange; }
     public void SetFireRange(float newFireRange) { _fireRange = newFireRange; }
-
-    public float GetDamage() { return Damage; }
-
-    public GameObject GetBulletPrefab() { return BulletPrefab; }
+    public float GetDamage() { return _damage; }
+    public GameObject GetBulletPrefab() { return _bulletPrefab; }
 
 
 }

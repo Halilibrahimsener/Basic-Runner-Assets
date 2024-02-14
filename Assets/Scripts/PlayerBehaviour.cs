@@ -27,9 +27,8 @@ public class PlayerBehaviour : MonoBehaviour
     {
         float _forwardSpeed = _playerSetting.GetForwardSpeed() * Time.deltaTime;
         transform.Translate(0, 0, _forwardSpeed);
+        EventManager.current.OnGunPositioningEventInvoke(transform.position);
 
-        Vector3 playerPosition = transform.position;
-        EventManager.current.OnFireEventInvoke(playerPosition);
     }
 
     private void OnInputPlayerLateralMovement(float xDifference)

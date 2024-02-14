@@ -11,6 +11,7 @@ public class GunBehaviour : MonoBehaviour
     float _timer = 0;
     float _fireRate;
     float _fireRange;
+    int gunID;
 
     void Start()
     {
@@ -19,35 +20,38 @@ public class GunBehaviour : MonoBehaviour
 
         _gunSetting.SetFireRange(_gunSetting.GetStartingFireRange());
         _fireRange = _gunSetting.GetFireRange();
-
-
-        EventManager.current.OnFireEvent += InstantiateBullet;
         EventManager.current.OnUpdateFireRangeOrRate += UpdateFireRangeOrRate;
+
+        GunSettings.GunNumber++;
+        gunID = _gunSetting.GetGunNumber();
+        EventManager.current.OnGunPositioningEvent += GunPositioning;
+
+    }
+    private void Update()
+    {
+        if (TryToFire())
+        {
+            Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
+        }
     }
 
-    void Update()
+    private bool TryToFire()
     {
-
-    }
-
-    private void InstantiateBullet(Vector3 PlayerPosition)
-    {
-        Vector3 gunPosition = GunPositioning(PlayerPosition);
         float fireDuration = 1f / (5 * _fireRate * Time.deltaTime);
         if (_timer > fireDuration)
         {
             _timer = 0;
-            Instantiate(_bulletPrefab, gunPosition, Quaternion.identity);
+            return true;
         }
         else
         {
             _timer += Time.deltaTime;
+            return false;
         }
     }
 
-    private Vector3 GunPositioning(Vector3 PlayerPosition)
+    private void GunPositioning(Vector3 PlayerPosition)
     {
-        int gunID = _gunSetting.GetGunID(); //1,2,3,4,...
         float xPosition = gunID * _distanceBetweenGuns;
         Vector3 gunPosition;
         if (gunID % 2 == 0)
@@ -59,10 +63,7 @@ public class GunBehaviour : MonoBehaviour
         {
             gunPosition = Vector3.left * xPosition + PlayerPosition;
         }
-
         transform.position = gunPosition;
-
-        return gunPosition;
     }
 
     private void UpdateFireRangeOrRate(DoorType doorType, float doorValue)
