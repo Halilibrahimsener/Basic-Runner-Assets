@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 644860d91046a6948875f6dd998406d8, type: 3}
   m_Name: GunSetting3
   m_EditorClassIdentifier: 
-  _gunNumber: 3
   _fireRate: 120
   _startingFireRange: 10
-  _damage: 12
+  _damage: 1
   _bulletPrefab: {fileID: 8703168670904394102, guid: 7159705b995698944bf5bf02abbae336, type: 3}

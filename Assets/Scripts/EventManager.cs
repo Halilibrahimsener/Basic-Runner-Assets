@@ -43,5 +43,17 @@ public class EventManager : MonoBehaviour
     {
         OnUpdateFireRangeOrRate?.Invoke(doorType, doorValue);
     }
+
+    public event Action<int> OnChangeMoneyCounterText;
+    public void OnChangeMoneyCounterTextInvoke(int totalMoney)
+    {
+        OnChangeMoneyCounterText?.Invoke(totalMoney);
+    }
+
+    public event Action<int> OnChangeLevelCounterText;
+    public void OnChangeLevelCounterTextInvoke(int levelNo)
+    {
+        OnChangeLevelCounterText?.Invoke(levelNo);
+    }
 }
 

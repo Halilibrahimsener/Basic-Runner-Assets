@@ -15,7 +15,7 @@ public class GunBehaviour : MonoBehaviour
 
     void Start()
     {
-        _fireRate = _gunSetting.GetFireRate();
+        _fireRate = _gunSetting.GetFireRate() + PlayerPrefs.GetInt("AdditionalFireRate");
         _bulletPrefab = _gunSetting.GetBulletPrefab();
 
         _gunSetting.SetFireRange(_gunSetting.GetStartingFireRange());

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 606c264546cc3fd468619e6acd043f2d, type: 3}
+  m_Name: TargetSetting1
+  m_EditorClassIdentifier: 
+  _firstRow: 10
+  _secondRow: 40
+  _thirdRow: 160
+  _fourthRow: 640
+  _fifthRow: 2560
+  _sixthRow: 10240
+  _seventhRow: 40960
+  _eighthRow: 163840
+  _ninethRow: 655360
+  _tenthRow: 2621440
+  _moneyPrefab: {fileID: 4707414986176253158, guid: 25a8e598f2a72cd4083ffc59d6718018, type: 3}

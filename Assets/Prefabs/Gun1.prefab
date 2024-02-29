@@ -111,5 +111,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gunSetting: {fileID: 11400000, guid: 105cc6e33bc067641a88288bcac5f90c, type: 2}
-  _distanceBetweenGuns: 0.15
-  FireRange: 10
+  _distanceBetweenGuns: 0.12

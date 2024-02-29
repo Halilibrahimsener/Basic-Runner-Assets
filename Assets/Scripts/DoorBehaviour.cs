@@ -43,17 +43,10 @@ public class DoorBehaviour : MonoBehaviour
         _doorTypeText.text = _doorType.ToString();
     }
 
-    private void Update()
-    {
-
-    }
-
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("\nDoor Type: " + _doorType + "\tDoor Value: " + _doorValue);
             if (!_triggered)
             {
                 _triggered = true;

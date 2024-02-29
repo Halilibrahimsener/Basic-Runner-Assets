@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0062d2d2f428984281c53a5fdcc6592, type: 3}
+  m_Name: GunButtonSetting1
+  m_EditorClassIdentifier: 
+  _gunButtonMaterial: {fileID: 2100000, guid: c9ccbb7c937c73d4abb6ad581a4f70d7, type: 2}
+  _gunButtonClosingSpeed: 40
+  _gunPrefabArray:
+  - {fileID: 1956734293797936602, guid: 0f1dafd8cf0defd499aef0dbc2f6d267, type: 3}
+  - {fileID: 1956734293797936602, guid: 86d02eb3133ff6247833f56f9cb84efd, type: 3}
+  - {fileID: 1956734293797936602, guid: 2e97ef8a12cb53842997b727a9edd5e0, type: 3}

@@ -15,14 +15,6 @@ public class BulletBehaviour : MonoBehaviour
         _startPosition = transform.position;
         _fireRange = _gunSetting.GetFireRange();
     }
-    private void Awake()
-    {
-
-    }
-    void Update()
-    {
-
-    }
 
     void FixedUpdate()
     {
@@ -32,6 +24,10 @@ public class BulletBehaviour : MonoBehaviour
         }
         else { Destroy(gameObject); }
     }
-    public void SetFireRange(float newFireRange) { _fireRange = newFireRange; }
+
+    public float GetBulletDamage()
+    {
+        return _gunSetting.GetDamage();
+    }
 
 }
