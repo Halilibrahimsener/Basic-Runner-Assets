@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,77 +6,60 @@ using UnityEngine.UI;
 public class EndGameUIBehaviour : MonoBehaviour
 {
 
-    private int _fireRateIncreaseCost;
-    private int _moneyValueIncreaseCost;
     [SerializeField] TextMeshProUGUI _fireRateIncreaseCostText;
-    [SerializeField] TextMeshProUGUI _moneyValueIncreaseCostText;
-    [SerializeField] Button IncreaseFireRateButton;
-    [SerializeField] Button IncreaseMoneyValueButton;
+    [SerializeField] TextMeshProUGUI _moneyIncomeIncreaseCostText;
+    [SerializeField] Button _increaseFireRateButton;
+    [SerializeField] Button _increaseMoneyValueButton;
+
 
 
     private void OnEnable()
     {
-        _fireRateIncreaseCost = PlayerPrefs.GetInt("FireRateIncreaseCost");
-        _moneyValueIncreaseCost = PlayerPrefs.GetInt("MoneyValueIncreaseCost");
-
-        _fireRateIncreaseCostText.text = CreateCostMoneyText(_fireRateIncreaseCost);
-        _moneyValueIncreaseCostText.text = CreateCostMoneyText(_moneyValueIncreaseCost);
+        _fireRateIncreaseCostText.text = CreateCostMoneyText(Registry.FireRateIncreaseCost);
+        _moneyIncomeIncreaseCostText.text = CreateCostMoneyText(Registry.MoneyIncomeIncreaseCost);
 
         CheckIsMoneyEnough();
     }
 
     public void OnFireRateIncrease()
     {
-        MoneyBehaviour.TotalMoney -= _fireRateIncreaseCost;
-        _fireRateIncreaseCost *= 2;
-        PlayerPrefs.SetInt("FireRateIncreaseCost", _fireRateIncreaseCost);
-        _fireRateIncreaseCostText.text = CreateCostMoneyText(_fireRateIncreaseCost);
+        Registry.TotalMoney -= Registry.FireRateIncreaseCost;
+        Registry.FireRateIncreaseCost *= 2;
+        _fireRateIncreaseCostText.text = CreateCostMoneyText(Registry.FireRateIncreaseCost);
 
-        int currentAdditionalFireRate = PlayerPrefs.GetInt("AdditionalFireRate");
-        PlayerPrefs.SetInt("AdditionalFireRate", currentAdditionalFireRate + 1);
+        Registry.AdditionalFireRate += 1;
 
-        EventManager.current.OnChangeMoneyCounterTextInvoke(MoneyBehaviour.TotalMoney);
+        EventManager.current.OnChangeMoneyCounterTextInvoke(Registry.TotalMoney);
 
         CheckIsMoneyEnough();
     }
 
     public void OnMoneyIncomeIncrease()
     {
-        MoneyBehaviour.TotalMoney -= _moneyValueIncreaseCost;
-        _moneyValueIncreaseCost *= 2;
-        PlayerPrefs.SetInt("MoneyValueIncreaseCost", _moneyValueIncreaseCost);
-        _moneyValueIncreaseCostText.text = CreateCostMoneyText(_moneyValueIncreaseCost);
+        Registry.TotalMoney -= Registry.MoneyIncomeIncreaseCost;
+        Registry.MoneyIncomeIncreaseCost *= 2;
+        _moneyIncomeIncreaseCostText.text = CreateCostMoneyText(Registry.MoneyIncomeIncreaseCost);
 
-        int currentAdditionalMoneyValue = PlayerPrefs.GetInt("AdditionalMoneyValue");
-        PlayerPrefs.SetInt("AdditionalMoneyValue", currentAdditionalMoneyValue + 1);
+        Registry.AdditionalMoneyIncome += 1;
 
-        EventManager.current.OnChangeMoneyCounterTextInvoke(MoneyBehaviour.TotalMoney);
+        EventManager.current.OnChangeMoneyCounterTextInvoke(Registry.TotalMoney);
 
         CheckIsMoneyEnough();
     }
 
-    public void OnNextLevel()
-    {
-        GunSettings.GunNumber = 0;
-        PlayerPrefs.SetInt("TotalMoney", MoneyBehaviour.TotalMoney);
-        PlayerPrefs.SetInt("LevelNo", PlayerPrefs.GetInt("LevelNo") + 1);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        Time.timeScale = 1;
-    }
-
     private void CheckIsMoneyEnough()
     {
-        if (MoneyBehaviour.TotalMoney >= _fireRateIncreaseCost)
+        if (Registry.TotalMoney >= Registry.FireRateIncreaseCost)
         {
-            IncreaseFireRateButton.interactable = true;
+            _increaseFireRateButton.interactable = true;
         }
-        else { IncreaseFireRateButton.interactable = false; }
+        else { _increaseFireRateButton.interactable = false; }
 
-        if (MoneyBehaviour.TotalMoney >= _moneyValueIncreaseCost)
+        if (Registry.TotalMoney >= Registry.MoneyIncomeIncreaseCost)
         {
-            IncreaseMoneyValueButton.interactable = true;
+            _increaseMoneyValueButton.interactable = true;
         }
-        else { IncreaseMoneyValueButton.interactable = false; }
+        else { _increaseMoneyValueButton.interactable = false; }
     }
 
     private string CreateCostMoneyText(int totalMoney)
@@ -104,6 +83,15 @@ public class EndGameUIBehaviour : MonoBehaviour
         }
 
         return moneyText;
+    }
+
+    public void OnNextLevel()
+    {
+        GunSettings.GunNumber = 0;
+        Registry.LevelNo += 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+        Time.timeScale = 1;
     }
 
 

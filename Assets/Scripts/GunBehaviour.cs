@@ -1,7 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
+
+public enum GunType
+{
+    Gun1,   //0
+    Gun2,   //1
+    Gun3    //2
+};
 
 public class GunBehaviour : MonoBehaviour
 {
@@ -15,7 +21,7 @@ public class GunBehaviour : MonoBehaviour
 
     void Start()
     {
-        _fireRate = _gunSetting.GetFireRate() + PlayerPrefs.GetInt("AdditionalFireRate");
+        _fireRate = _gunSetting.GetFireRate() + Registry.AdditionalFireRate;
         _bulletPrefab = _gunSetting.GetBulletPrefab();
 
         _gunSetting.SetFireRange(_gunSetting.GetStartingFireRange());
@@ -23,7 +29,7 @@ public class GunBehaviour : MonoBehaviour
         EventManager.current.OnUpdateFireRangeOrRate += UpdateFireRangeOrRate;
 
         GunSettings.GunNumber++;
-        gunID = _gunSetting.GetGunNumber();
+        gunID = GunSettings.GunNumber;
         EventManager.current.OnGunPositioningEvent += GunPositioning;
 
     }

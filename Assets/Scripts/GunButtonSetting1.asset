@@ -15,6 +15,6 @@ MonoBehaviour:
   _gunButtonMaterial: {fileID: 2100000, guid: c9ccbb7c937c73d4abb6ad581a4f70d7, type: 2}
   _gunButtonClosingSpeed: 40
   _gunPrefabArray:
-  - {fileID: 1956734293797936602, guid: 0f1dafd8cf0defd499aef0dbc2f6d267, type: 3}
-  - {fileID: 1956734293797936602, guid: 86d02eb3133ff6247833f56f9cb84efd, type: 3}
-  - {fileID: 1956734293797936602, guid: 2e97ef8a12cb53842997b727a9edd5e0, type: 3}
+  - {fileID: 1956734293797936607, guid: 0f1dafd8cf0defd499aef0dbc2f6d267, type: 3}
+  - {fileID: 1956734293797936607, guid: 86d02eb3133ff6247833f56f9cb84efd, type: 3}
+  - {fileID: 1956734293797936607, guid: 2e97ef8a12cb53842997b727a9edd5e0, type: 3}

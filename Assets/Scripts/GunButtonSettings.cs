@@ -7,11 +7,11 @@ public class GunButtonSettings : ScriptableObject
 {
     [SerializeField] Material _gunButtonMaterial;
     [SerializeField] float _gunButtonClosingSpeed;
-    [SerializeField] GameObject[] _gunPrefabArray;
+    [SerializeField] GunBehaviour[] _gunPrefabArray;    //must be sorted according to _gunType enum
 
 
     public Material GetGunButtonMaterial() { return _gunButtonMaterial; }
     public float GetGunButtonClosingSpeed() { return _gunButtonClosingSpeed; }
-    public GameObject[] GetGunPrefabArray() { return _gunPrefabArray; }
+    public GunBehaviour[] GetGunPrefabArray() { return _gunPrefabArray; }
 
 }

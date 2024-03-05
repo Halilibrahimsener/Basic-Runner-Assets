@@ -16,6 +16,7 @@ public class GunSettings : ScriptableObject
     private float _fireRange;
     [SerializeField] float _damage;
     [SerializeField] GameObject _bulletPrefab;
+    [SerializeField] Material _gunMaterial;
 
     public int GetGunNumber() { return GunNumber; }
     public float GetFireRate() { return _fireRate; }
@@ -24,5 +25,6 @@ public class GunSettings : ScriptableObject
     public void SetFireRange(float newFireRange) { _fireRange = newFireRange; }
     public float GetDamage() { return _damage; }
     public GameObject GetBulletPrefab() { return _bulletPrefab; }
+    public Material GetGunMaterial() { return _gunMaterial; }
 
 }

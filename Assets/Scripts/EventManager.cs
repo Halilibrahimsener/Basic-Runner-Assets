@@ -24,8 +24,6 @@ public class EventManager : MonoBehaviour
     #endregion Singleton
 
 
-
-
     public event Action<float> OnInputEvent;
 
     public void OnInputEventInvoke(float xDifference)

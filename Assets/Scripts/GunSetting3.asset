@@ -16,3 +16,4 @@ MonoBehaviour:
   _startingFireRange: 10
   _damage: 1
   _bulletPrefab: {fileID: 8703168670904394102, guid: 7159705b995698944bf5bf02abbae336, type: 3}
+  _gunMaterial: {fileID: 2100000, guid: 28ad91d0d209806448a999a43fb7b1b8, type: 2}

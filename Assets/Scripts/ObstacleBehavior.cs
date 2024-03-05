@@ -21,8 +21,8 @@ public class ObstacleBehavior : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            _closingSpeed = _obstacleSettings.GetClosingSpeed();                          //I defined these here so that we can change the settings and see the 
-            _playersPushBackDistance = _obstacleSettings.GetPlayersPushBackDistance();    //changes at the same time while the game is playing.
+            _closingSpeed = _obstacleSettings.GetClosingSpeed();
+            _playersPushBackDistance = _obstacleSettings.GetPlayersPushBackDistance();
             _triggerDelay = _obstacleSettings.GetTriggerDelay();
 
             _health -= 1;
@@ -34,7 +34,7 @@ public class ObstacleBehavior : MonoBehaviour
 
             other.transform.DOMoveZ(other.transform.position.z - _playersPushBackDistance, 1f);
             _collider.isTrigger = false;
-            Invoke("isTriggerOpener", _triggerDelay);  //I used this method just to implement 1second delay. 0.2seconds was not long enough
+            Invoke("isTriggerOpener", _triggerDelay);
         }
     }
 

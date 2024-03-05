@@ -9,16 +9,15 @@ public class InGameUIBehaviour : MonoBehaviour
     [SerializeField] TextMeshProUGUI _levelText;
     private int _levelStartMoney;
     private int _currentLevel;
-    Registry _registry;
 
     void Start()
     {
-        _levelStartMoney = PlayerPrefs.GetInt("TotalMoney");
+        _levelStartMoney = Registry.TotalMoney;
         ChangeMoneyText(_levelStartMoney);
 
         EventManager.current.OnChangeMoneyCounterText += ChangeMoneyText;
 
-        _currentLevel = PlayerPrefs.GetInt("LevelNo");
+        _currentLevel = Registry.LevelNo;
         ChangeLevelText(_currentLevel);
 
         EventManager.current.OnChangeLevelCounterText += ChangeLevelText;
@@ -47,6 +46,11 @@ public class InGameUIBehaviour : MonoBehaviour
     private void ChangeLevelText(int currentLevel)
     {
         _levelText.text = "Level: " + currentLevel.ToString();
+    }
+
+    public void ResetGame()
+    {
+        Registry.ResetAllPlayerPrefs();
     }
 
 

@@ -6,46 +6,32 @@ using UnityEngine;
 
 public class GunButtonBehaviour : MonoBehaviour
 {
-
-
-
     [SerializeField] GunButtonSettings _gunButtonSetting;
-    GameObject[] _gunArray;
+    [SerializeField] TextMeshPro _gunNameText;
+    GunBehaviour[] _gunPrefabArray;   //must be sorted according to _gunType enum
+    GunBehaviour _gun;
     float _closingSpeed;
-    GameObject _gun;
-    [SerializeField] TextMeshProUGUI _gunNameText;
 
-
-
-    void Start()
+    void Awake()
     {
-        _gunArray = _gunButtonSetting.GetGunPrefabArray();
+        _gunPrefabArray = _gunButtonSetting.GetGunPrefabArray();
         _closingSpeed = _gunButtonSetting.GetGunButtonClosingSpeed() * Time.deltaTime;
-
-        _gun = ChooseGun();
-        _gunNameText.text = _gun.name;
-
-    }
-
-
-
-    void Update()
-    {
-
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            Instantiate(_gun);
+            Instantiate<GunBehaviour>(_gun);
+
             transform.DOMoveY(transform.position.y - 1, 1 / _closingSpeed);
         }
     }
 
-    private GameObject ChooseGun()
+    public void AssignGunType(GunType gunType)
     {
-        int randomGunIndex = Random.Range(0, _gunArray.Length);
-        return _gunArray[randomGunIndex];
+        int gunIndex = (int)gunType;
+        _gun = _gunPrefabArray[gunIndex];
+        _gunNameText.text = _gun.name;
     }
 }

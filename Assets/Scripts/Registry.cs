@@ -1,64 +1,103 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Registry : MonoBehaviour
+public static class Registry
 {
 
-    void Start()
+    #region Keys
+    private const string TotalMoneyKey = "TotalMoneyKey";
+    private const string LevelNoKey = "LevelNoKey";
+    private const string AdditionalFireRateKey = "AdditionalFireRateKey";
+    private const string AdditionalMoneyIncomeKey = "AdditionalMoneyIncomeKey";
+    private const string FireRateIncreaseCostKey = "FireRateIncreaseCostKey";
+    private const string MoneyIncomeIncreaseCostKey = "MoneyIncomeIncreaseCostKey";
+
+    #endregion
+
+    public static int TotalMoney
     {
-        InitializePlayerPrefs();
+        set
+        {
+            PlayerPrefs.SetInt(TotalMoneyKey, value);
+            PlayerPrefs.Save();
+        }
+        get
+        {
+            return PlayerPrefs.GetInt(TotalMoneyKey, 0);
+        }
     }
 
-    public void InitializePlayerPrefs()
+    public static int LevelNo
     {
-        if (!PlayerPrefs.HasKey("TotalMoney"))
+        set
         {
-            PlayerPrefs.SetInt("TotalMoney", 0);
+            PlayerPrefs.SetInt(LevelNoKey, value);
+            PlayerPrefs.Save();
         }
-
-        if (!PlayerPrefs.HasKey("LevelNo"))
+        get
         {
-            PlayerPrefs.SetInt("LevelNo", 1);
+            return PlayerPrefs.GetInt(LevelNoKey, 1);
         }
-
-        if (!PlayerPrefs.HasKey("AdditionalFireRate"))
-        {
-            PlayerPrefs.SetInt("AdditionalFireRate", 0);
-        }
-
-        if (!PlayerPrefs.HasKey("AdditionalMoneyValue"))
-        {
-            PlayerPrefs.SetInt("AdditionalMoneyValue", 0);
-        }
-
-        if (!PlayerPrefs.HasKey("FireRateIncreaseCost"))
-        {
-            PlayerPrefs.SetInt("FireRateIncreaseCost", 10);
-        }
-
-        if (!PlayerPrefs.HasKey("MoneyValueIncreaseCost"))
-        {
-            PlayerPrefs.SetInt("MoneyValueIncreaseCost", 10);
-        }
-
-        Debug.Log("Total Money: " + PlayerPrefs.GetInt("TotalMoney"));
-        Debug.Log("Level No: " + PlayerPrefs.GetInt("LevelNo"));
-        Debug.Log("Additional Fire Rate: " + PlayerPrefs.GetInt("AdditionalFireRate"));
-        Debug.Log("Additional Money Value: " + PlayerPrefs.GetInt("AdditionalMoneyValue"));
-        Debug.Log("Fire Rate Increase Cost: " + PlayerPrefs.GetInt("FireRateIncreaseCost"));
-        Debug.Log("Money Value Increase Cost: " + PlayerPrefs.GetInt("MoneyValueIncreaseCost"));
-
     }
 
-    public void ResetAllPlayerPrefs()
+    public static int AdditionalFireRate
+    {
+        set
+        {
+            PlayerPrefs.SetInt(AdditionalFireRateKey, value);
+            PlayerPrefs.Save();
+        }
+        get
+        {
+            return PlayerPrefs.GetInt(AdditionalFireRateKey, 0);
+        }
+    }
+
+    public static int AdditionalMoneyIncome
+    {
+        set
+        {
+            PlayerPrefs.SetInt(AdditionalMoneyIncomeKey, value);
+            PlayerPrefs.Save();
+        }
+        get
+        {
+            return PlayerPrefs.GetInt(AdditionalMoneyIncomeKey, 0);
+        }
+    }
+
+    public static int FireRateIncreaseCost
+    {
+        set
+        {
+            PlayerPrefs.SetInt(FireRateIncreaseCostKey, value);
+            PlayerPrefs.Save();
+        }
+        get
+        {
+            return PlayerPrefs.GetInt(FireRateIncreaseCostKey, 10);
+        }
+    }
+
+    public static int MoneyIncomeIncreaseCost
+    {
+        set
+        {
+            PlayerPrefs.SetInt(MoneyIncomeIncreaseCostKey, value);
+            PlayerPrefs.Save();
+        }
+        get
+        {
+            return PlayerPrefs.GetInt(MoneyIncomeIncreaseCostKey, 10);
+        }
+    }
+
+    public static void ResetAllPlayerPrefs()
     {
         PlayerPrefs.DeleteAll();
-        InitializePlayerPrefs();
 
-        EventManager.current.OnChangeMoneyCounterTextInvoke(PlayerPrefs.GetInt("TotalMoney"));
-        EventManager.current.OnChangeLevelCounterTextInvoke(PlayerPrefs.GetInt("LevelNo"));
+        EventManager.current.OnChangeMoneyCounterTextInvoke(TotalMoney);
+        EventManager.current.OnChangeLevelCounterTextInvoke(LevelNo);
 
         GunSettings.GunNumber = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

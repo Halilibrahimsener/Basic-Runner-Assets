@@ -14,7 +14,6 @@ public class DoorSettings : ScriptableObject
     [SerializeField] float ClosingSpeed;
 
 
-
     public Material GetNegativeValueMaterials()
     {
         return NegativeValueMaterial;

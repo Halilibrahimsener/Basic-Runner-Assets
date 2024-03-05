@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class TargetBehaviour : MonoBehaviour
 {
 
-    [SerializeField] TextMeshProUGUI _targetValueText;
+    [SerializeField] TextMeshPro _targetValueText;
     [SerializeField] TargetSettings _targetSetting;
     [SerializeField] FlexalonGridLayout _layoutSetting;
     float _targetValue;

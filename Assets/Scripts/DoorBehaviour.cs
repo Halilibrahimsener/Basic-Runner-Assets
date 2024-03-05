@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 
 public enum DoorType
@@ -15,22 +13,26 @@ public enum DoorType
 public class DoorBehaviour : MonoBehaviour
 {
     bool _triggered = false;
-    DoorType _doorType;
-    [SerializeField] float _doorValue;  // I gave value randomly.
+    private DoorType _doorType;
+    float _doorValue;
     [SerializeField] DoorSettings _doorSettings;
     [SerializeField] Renderer _renderer;
-    [SerializeField] TextMeshProUGUI _doorValueText;
-    [SerializeField] TextMeshProUGUI _doorTypeText;
+    [SerializeField] TextMeshPro _doorValueText;
+    [SerializeField] TextMeshPro _doorTypeText;
 
-    private void Awake()
+
+    public void AssignDoorType(DoorType doorType)
     {
-        float randomValue = Random.value;
+        _doorType = doorType;
+        _doorTypeText.text = _doorType.ToString();
+    }
 
-        if (randomValue >= 0.5) { _doorType = DoorType.FireRange; }
-        else { _doorType = DoorType.FireRate; }
+    public void AssignDoorValue(int doorValue)
+    {
+        _doorValue = doorValue;
+        _doorValueText.text = _doorValue.ToString();
 
-
-        if (_doorValue < 0)
+        if (doorValue < 0)
         {
             _renderer.material = _doorSettings.GetNegativeValueMaterials();
         }
@@ -38,9 +40,6 @@ public class DoorBehaviour : MonoBehaviour
         {
             _renderer.material = _doorSettings.GetPositiveValueMaterials();
         }
-
-        _doorValueText.text = _doorValue.ToString();
-        _doorTypeText.text = _doorType.ToString();
     }
 
     private void OnTriggerEnter(Collider other)
