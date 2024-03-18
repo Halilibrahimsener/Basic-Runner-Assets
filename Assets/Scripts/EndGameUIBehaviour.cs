@@ -87,9 +87,14 @@ public class EndGameUIBehaviour : MonoBehaviour
 
     public void OnNextLevel()
     {
+        GameManager.currentGameManager.DeletePreviousLevel();
         GunSettings.GunNumber = 0;
         Registry.LevelNo += 1;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        EventManager.current.OnChangeLevelCounterTextInvoke(Registry.LevelNo);
+        EventManager.current.OnChangeMoneyCounterTextInvoke(Registry.TotalMoney);
+        GameManager.currentGameManager.InstantiateLevel();
+
+        gameObject.SetActive(false);
 
         Time.timeScale = 1;
     }

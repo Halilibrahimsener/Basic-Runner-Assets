@@ -10,9 +10,12 @@ public class MoneyBehaviour : MonoBehaviour
 
     [SerializeField] MoneySettings _moneySetting;
     private int _moneyValue;
-    [SerializeField] Collider _collider;
 
     private void Start()
+    {
+        EventManager.current.OnDeleteCurrentLevel += OnMoneyReturn;
+    }
+    private void OnEnable()
     {
         _moneyValue = _moneySetting.GetMoneyValue() + Registry.AdditionalMoneyIncome;
     }
@@ -23,8 +26,13 @@ public class MoneyBehaviour : MonoBehaviour
         {
             Registry.TotalMoney += _moneyValue;
             EventManager.current.OnChangeMoneyCounterTextInvoke(Registry.TotalMoney);
-            Destroy(gameObject);
+            PoolController.Return(name, gameObject);
         }
     }
+    private void OnMoneyReturn()
+    {
+        PoolController.Return(name, gameObject);
+    }
+
 
 }

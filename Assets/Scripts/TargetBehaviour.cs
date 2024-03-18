@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using Flexalon;
 using TMPro;
 using UnityEngine;
@@ -14,28 +15,44 @@ public class TargetBehaviour : MonoBehaviour
     [SerializeField] FlexalonGridLayout _layoutSetting;
     float _targetValue;
     int _moneyCounter = 0;
+    private static int TargetNo = 1;
+
 
     void Start()
     {
-        GiveTargetValue();
-        ChangeTextValue();
+        EventManager.current.OnDeleteCurrentLevel += OnTargetReturn;
     }
 
-    void GiveTargetValue()
+    private void OnEnable()
     {
-        float _rowSize, _rowNumber, _startPoint;
+        GivePositionAndValueToTarget();
+        ChangeTextValue();
+        _moneyCounter = 0;
+    }
 
-        _rowSize = _layoutSetting.RowSize;
-        _rowNumber = _layoutSetting.Rows;
-        _startPoint = transform.parent.position.z - _rowSize * ((_rowNumber - 1) / 2);
+    void GivePositionAndValueToTarget()  //Bu işlemi aslında GameManager'a yaptırsam daha hızlı çalışabilir kod? Poziyonlar her level'da aynı neticede.
+    {
+        int targetsPerRow = _targetSetting.GetTargetsPerRow();
+        float distanceBetweenRows = _targetSetting.GetDistanceBetweenRows();
+        float firstRowLocationZ = _targetSetting.GetFirstRowLocationZ();
+        float distanceBetweenColumns = _targetSetting.GetDistanceBetweenColums();
+        int totalNumberOfRows = _targetSetting.GetTotalNumberOfRows();
 
-        int[] targetRowValues = _targetSetting.GetTargetRowValues();
-        for (int i = 0; i < _rowNumber; i++)
+        int rowNumber = (TargetNo - 1) / targetsPerRow;
+        _targetValue = _targetSetting.GetTargetRowValues()[rowNumber];
+
+        float positionX = -distanceBetweenColumns + ((TargetNo - 1) % targetsPerRow) * distanceBetweenColumns;
+        float positionZ = rowNumber * distanceBetweenRows + firstRowLocationZ;
+        UnityEngine.Vector3 position = new UnityEngine.Vector3(positionX, 1, positionZ);
+        transform.position = position;
+
+        if (TargetNo == targetsPerRow * totalNumberOfRows)
         {
-            if (transform.position.z == _startPoint + _rowSize * i)
-            {
-                _targetValue = targetRowValues[i];
-            }
+            TargetNo = 1;
+        }
+        else
+        {
+            TargetNo++;
         }
     }
 
@@ -64,26 +81,30 @@ public class TargetBehaviour : MonoBehaviour
 
         if (other.CompareTag("Bullet"))
         {
-
             if (_targetValue <= 1)
             {
                 if (_moneyCounter == 0)
                 {
                     GameObject moneyPrefab = _targetSetting.GetMoneyPrefab();
-                    Instantiate(moneyPrefab, transform.position, Quaternion.identity);
-                    Destroy(gameObject);
+                    PoolController.Get(moneyPrefab.name, transform.position);
+                    PoolController.Return(name, gameObject);
                     _moneyCounter++;
                 }
             }
             else
             {
-                float damage = other.GetComponent<BulletBehaviour>().GetBulletDamage(); //I couldn't find a different way.
+                float damage = other.GetComponent<BulletBehaviour>().GetBulletDamage();
                 _targetValue -= damage;
                 ChangeTextValue();
             }
 
-            Destroy(other.gameObject);
+            PoolController.Return(other.name, other.gameObject);
         }
+    }
+
+    private void OnTargetReturn()
+    {
+        PoolController.Return(name, gameObject);
     }
 
 

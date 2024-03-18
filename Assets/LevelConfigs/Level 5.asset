@@ -12,21 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47d6fb4eb63ee7a4983273d8b580d843, type: 3}
   m_Name: Level 5
   m_EditorClassIdentifier: 
+  _startingGun: 1
   _doors:
-  - Position: {x: 0, y: 1.5, z: 40}
+  - Position: {x: -2.75, y: 1.5, z: 45}
+    doorType: 1
+    DoorValue: 10
+  - Position: {x: 2.75, y: 1.5, z: 45}
     doorType: 0
-    DoorValue: 5
-  - Position: {x: 3, y: 1.5, z: 45}
+    DoorValue: 8
+  - Position: {x: 0, y: 1.5, z: 60}
     doorType: 0
-    DoorValue: 2
+    DoorValue: 8
   _obstacles:
-  - Position: {x: 0, y: 0.6, z: 25}
-  - Position: {x: -2, y: 0.6, z: 35}
-  - Position: {x: 2, y: 0.6, z: 55}
+  - Position: {x: -2, y: 0.6, z: 40}
+  - Position: {x: 2, y: 0.6, z: 40}
   _gunButtons:
   - Position: {x: 2, y: 0.6, z: 8}
+    gunType: 0
+  - Position: {x: -2, y: 0.6, z: 15}
     gunType: 2
-  - Position: {x: 0, y: 0.6, z: 10}
-    gunType: 2
-  - Position: {x: 2, y: 0.6, z: 15}
-    gunType: 1

@@ -20,15 +20,20 @@ public class DoorBehaviour : MonoBehaviour
     [SerializeField] TextMeshPro _doorValueText;
     [SerializeField] TextMeshPro _doorTypeText;
 
+    private void Start()
+    {
+        EventManager.current.OnDeleteCurrentLevel += OnDoorReturn;
+    }
 
-    public void AssignDoorType(DoorType doorType)
+    private void OnEnable()
+    {
+        _triggered = false;
+    }
+    public void AssignDoorTypeAndValue(DoorType doorType, int doorValue)
     {
         _doorType = doorType;
         _doorTypeText.text = _doorType.ToString();
-    }
 
-    public void AssignDoorValue(int doorValue)
-    {
         _doorValue = doorValue;
         _doorValueText.text = _doorValue.ToString();
 
@@ -57,9 +62,16 @@ public class DoorBehaviour : MonoBehaviour
         else if (other.CompareTag("Bullet"))
         {
             _doorValue += 1;
-            Destroy(other.gameObject);
+            //Destroy(other.gameObject);
+            PoolController.Return(other.name, other.gameObject);
             _doorValueText.text = _doorValue.ToString();
             if (_doorValue >= 0) { _renderer.material = _doorSettings.GetPositiveValueMaterials(); }
         }
+    }
+
+    private void OnDoorReturn()
+    {
+        transform.DOKill(false);
+        PoolController.Return(name, gameObject);
     }
 }

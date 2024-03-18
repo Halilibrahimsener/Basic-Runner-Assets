@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 606c264546cc3fd468619e6acd043f2d, type: 3}
   m_Name: TargetSetting1
   m_EditorClassIdentifier: 
+  _targetsPerRow: 3
+  _distanceBetweenRows: 3
+  _distanceBetweenColums: 3
+  _firstRowLocationZ: 100
+  _totalNumberOfRows: 8
   _firstRow: 10
   _secondRow: 40
   _thirdRow: 160

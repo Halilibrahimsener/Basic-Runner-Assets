@@ -5,6 +5,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Target", menuName = "New Target Setting", order = 5)]
 public class TargetSettings : ScriptableObject
 {
+    [Header("Target Number Settings")]
+    [SerializeField] int _targetsPerRow;
+    [SerializeField] float _distanceBetweenRows;
+    [SerializeField] float _distanceBetweenColums;
+    [SerializeField] float _firstRowLocationZ;
+    [SerializeField] int _totalNumberOfRows;
 
     [Header("Target Values")]
     [SerializeField] int _firstRow;
@@ -30,4 +36,9 @@ public class TargetSettings : ScriptableObject
     }
 
     public GameObject GetMoneyPrefab() { return _moneyPrefab; }
+    public int GetTargetsPerRow() { return _targetsPerRow; }
+    public float GetDistanceBetweenRows() { return _distanceBetweenRows; }
+    public float GetFirstRowLocationZ() { return _firstRowLocationZ; }
+    public float GetDistanceBetweenColums() { return _distanceBetweenColums; }
+    public int GetTotalNumberOfRows() { return _totalNumberOfRows; }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Numerics;
 
 
 public class EventManager : MonoBehaviour
@@ -30,8 +31,8 @@ public class EventManager : MonoBehaviour
     {
         OnInputEvent?.Invoke(xDifference);
     }
-    public event Action<Vector3> OnGunPositioningEvent;
-    public void OnGunPositioningEventInvoke(Vector3 PlayerPosition)
+    public event Action<UnityEngine.Vector3> OnGunPositioningEvent;
+    public void OnGunPositioningEventInvoke(UnityEngine.Vector3 PlayerPosition)
     {
         OnGunPositioningEvent?.Invoke(PlayerPosition);
     }
@@ -52,6 +53,18 @@ public class EventManager : MonoBehaviour
     public void OnChangeLevelCounterTextInvoke(int levelNo)
     {
         OnChangeLevelCounterText?.Invoke(levelNo);
+    }
+
+    public event Action<UnityEngine.Vector3> OnSetBulletStartPosition;
+    public void OnSetBulletStartPositionInvoke(UnityEngine.Vector3 position)
+    {
+        OnSetBulletStartPosition?.Invoke(position);
+    }
+
+    public event Action OnDeleteCurrentLevel;
+    public void OnDeleteCurrentLevelInvoke()
+    {
+        OnDeleteCurrentLevel?.Invoke();
     }
 }
 

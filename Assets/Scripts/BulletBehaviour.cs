@@ -12,6 +12,10 @@ public class BulletBehaviour : MonoBehaviour
 
     void Start()
     {
+        EventManager.current.OnSetBulletStartPosition += SetStartPosition;
+    }
+    private void OnEnable()
+    {
         _startPosition = transform.position;
         _fireRange = _gunSetting.GetFireRange();
     }
@@ -22,12 +26,21 @@ public class BulletBehaviour : MonoBehaviour
         {
             transform.Translate(0, 0, 0.5f);
         }
-        else { Destroy(gameObject); }
+        else
+        {
+            PoolController.Return(name, this.gameObject);
+            //Destroy(gameObject);
+        }
     }
 
     public float GetBulletDamage()
     {
         return _gunSetting.GetDamage();
+    }
+
+    private void SetStartPosition(UnityEngine.Vector3 position)
+    {
+        _startPosition = position;
     }
 
 }

@@ -12,26 +12,37 @@ public class GunButtonBehaviour : MonoBehaviour
     GunBehaviour _gun;
     float _closingSpeed;
 
-    void Awake()
+    void Start()
     {
-        _gunPrefabArray = _gunButtonSetting.GetGunPrefabArray();
-        _closingSpeed = _gunButtonSetting.GetGunButtonClosingSpeed() * Time.deltaTime;
+        EventManager.current.OnDeleteCurrentLevel += OnGunButtonReturn;
+    }
+    private void OnEnable()
+    {
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            Instantiate<GunBehaviour>(_gun);
-
+            _closingSpeed = _gunButtonSetting.GetGunButtonClosingSpeed() * Time.deltaTime;
+            Debug.Log("In trigger and closing speed: " + _closingSpeed);
+            PoolController.Get(_gun.name, transform.position);
             transform.DOMoveY(transform.position.y - 1, 1 / _closingSpeed);
         }
     }
 
     public void AssignGunType(GunType gunType)
     {
+        _gunPrefabArray = _gunButtonSetting.GetGunPrefabArray();
         int gunIndex = (int)gunType;
         _gun = _gunPrefabArray[gunIndex];
         _gunNameText.text = _gun.name;
+    }
+
+    private void OnGunButtonReturn()
+    {
+        transform.DOKill(false);
+        PoolController.Return(name, gameObject);
     }
 }

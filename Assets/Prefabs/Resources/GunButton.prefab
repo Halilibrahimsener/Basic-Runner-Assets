@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 364381022589439398}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.65, y: 0.6, z: 11.31}
+  m_LocalPosition: {x: 0, y: 0.6, z: 10}
   m_LocalScale: {x: 1, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -113,6 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gunButtonSetting: {fileID: 11400000, guid: b489fa139c648b047ad5d7426b9aba8e, type: 2}
   _gunNameText: {fileID: 1479848007613514576}
+  _closingSpeed: 0
 --- !u!1 &4440461669738690631
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,7 +214,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Gun Name
+  m_text: Gun3
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d41caa86775a2d24fa86f17ec0f8d94a, type: 2}
   m_sharedMaterial: {fileID: 7762554383194064283, guid: d41caa86775a2d24fa86f17ec0f8d94a, type: 2}

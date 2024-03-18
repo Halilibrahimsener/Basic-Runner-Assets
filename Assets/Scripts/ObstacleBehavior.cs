@@ -14,6 +14,10 @@ public class ObstacleBehavior : MonoBehaviour
 
     void Start()
     {
+        EventManager.current.OnDeleteCurrentLevel += OnObstacleReturn;
+    }
+    private void OnEnable()
+    {
         _health = _obstacleSettings.GetHealth();
     }
 
@@ -41,5 +45,11 @@ public class ObstacleBehavior : MonoBehaviour
     private void isTriggerOpener()
     {
         _collider.isTrigger = true;
+    }
+
+    private void OnObstacleReturn()
+    {
+        transform.DOKill(false);
+        PoolController.Return(name, gameObject);
     }
 }

@@ -10,19 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 47d6fb4eb63ee7a4983273d8b580d843, type: 3}
-  m_Name: Level 8
+  m_Name: Level 11
   m_EditorClassIdentifier: 
   _doors:
   - Position: {x: 0, y: 1.5, z: 40}
     doorType: 0
     DoorValue: 5
   - Position: {x: 3, y: 1.5, z: 45}
-    doorType: 0
-    DoorValue: 2
-  - Position: {x: -3, y: 1.5, z: 55}
-    doorType: 1
-    DoorValue: 2
-  - Position: {x: 0, y: 1.5, z: 60}
     doorType: 1
     DoorValue: 2
   _obstacles:
@@ -36,7 +30,4 @@ MonoBehaviour:
     gunType: 2
   - Position: {x: 2, y: 0.6, z: 15}
     gunType: 1
-  - Position: {x: -3, y: 0.6, z: 12}
-    gunType: 0
-  - Position: {x: 0, y: 0.6, z: 18}
-    gunType: 2
+  _startingGun: 1

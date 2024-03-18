@@ -4,9 +4,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "LevelConfig", menuName = "New Level Config", order = 8)]
 public sealed class ScriptableLevelConfig : ScriptableObject
 {
+
     [SerializeField] Doors[] _doors;
     [SerializeField] Obstacles[] _obstacles;
     [SerializeField] GunButtons[] _gunButtons;
+    [SerializeField] GunType _startingGun;
 
 
 
@@ -31,6 +33,7 @@ public sealed class ScriptableLevelConfig : ScriptableObject
         public GunType gunType;
     }
 
+    public GunType GetStartingGun() { return _startingGun; }
     public Doors[] GetDoors() { return _doors; }
     public Obstacles[] GetObstacles() { return _obstacles; }
     public GunButtons[] GetGunButtons() { return _gunButtons; }

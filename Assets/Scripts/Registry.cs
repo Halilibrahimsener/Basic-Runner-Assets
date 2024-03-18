@@ -95,12 +95,13 @@ public static class Registry
     public static void ResetAllPlayerPrefs()
     {
         PlayerPrefs.DeleteAll();
+        GameManager.currentGameManager.DeletePreviousLevel();
 
         EventManager.current.OnChangeMoneyCounterTextInvoke(TotalMoney);
         EventManager.current.OnChangeLevelCounterTextInvoke(LevelNo);
 
         GunSettings.GunNumber = 0;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        GameManager.currentGameManager.InstantiateLevel();
     }
 
 
